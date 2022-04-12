@@ -7,11 +7,11 @@ branch = 'training' # 'training' or 'validation'
 
 
 # Set up output header and detail fields.
-fields_h = ['filename', 'folder', 'imsize', 'scene']
-fields_h_calc = ['header_id']
+fields_h = ['filename', 'folder', 'scene']
+fields_h_calc = ['header_id', 'width', 'height']
 header_fields = fields_h_calc + fields_h
 fields_d = ['id', 'raw_name', 'depth_ordering_rank', 'crop']
-fields_d_calc = ['header_id', 'num_mask_points', 'xmin', 'ymin', 'xmax', 'ymax', 'size']
+fields_d_calc = ['header_id', 'num_mask_points', 'xmin', 'ymin', 'xmax', 'ymax', 'width', 'height']
 detail_fields = fields_d + fields_d_calc
 
 # Fields from the files.
@@ -40,6 +40,8 @@ with open('ade20k_header.csv', 'w', newline='') as header_out, open('ade20k_deta
             row_h['header_id'] = header_id
             for f in fields_h:
                 row_h[f] = data[f]
+            row_h['height'] = int(data['imsize'][0])
+            row_h['width'] = int(data['imsize'][1])
             writer_h.writerow(row_h)
 
             # Write the detail row.
@@ -61,13 +63,14 @@ with open('ade20k_header.csv', 'w', newline='') as header_out, open('ade20k_deta
                 xmax= max(poly['x'])
                 ymax= max(poly['y'])
 
-                row_d['xmin'] = xmin
-                row_d['ymin'] = ymin
-                row_d['xmax'] = xmax
-                row_d['ymax'] = ymax
+                row_d['xmin'] = int(xmin)
+                row_d['ymin'] = int(ymin)
+                row_d['xmax'] = int(xmax)
+                row_d['ymax'] = int(ymax)
 
-                # Calculate size.
-                row_d['size'] = (xmax-xmin) * (ymax-ymin)
+                # Calculate width and height.
+                row_d['width'] = int(xmax-xmin)
+                row_d['height'] = int(ymax-ymin)
 
                 # Write detail row.
                 writer_d.writerow(row_d)
