@@ -4,7 +4,7 @@
 
 This is the repo for our MLE capstone project at fourthbrain.ai, cohort 6. The domain we have chosen is Image Annotation, specifically Semantic Segmentation. We aim to create value for the human annotators, and to try our best to enable an increase in both speed and accuracy of the annotations.
 
-Our vision: Every annotator is happy and having fun at their job. Our mission: To create a proof-of-concept smart annotation platform that is easy to learn and hard to forget.
+Our vision: Every annotator is happy and having fun at their job. Our mission: To create a working proof-of-concept smart annotation platform that is easy to learn and hard to forget.
 
 
 
@@ -14,7 +14,7 @@ We are limiting the scope to only single-user scenarios, doing mainly segmentati
 
 The metrics we use for measuring speed improvement are collected per segmented object and also per image. We count the number of clicks, the number of seconds of mouse-button-down while moving, and the number of clicks for extra-annotation tasks (tasks not directly related to the actual annotation tasks, e.g. loading file, saving progress, etc).
 
-We will perform manual inspections instead of implementing accuracy metrics. If time permits, we will try generating synthetic images starting from masks, and automate measurement of accuracy that way.
+We will perform manual inspections instead of implementing accuracy metrics. If time permits, we will try generating synthetic images starting from masks, and automate measurement of accuracy that way. However, the number of polygon points per object will be used against ADE20K and Cityscapes datasets, along with eyeballing, as a measure of balance between speed and accuracy.
 
 
 
@@ -50,7 +50,7 @@ graph LR
 
 ## V2
 
-Version 2 will include a REST API that talks to the "feature store" (pandas + a single csv file), and to the ML backend. Each input file is given a GUID as the id. Frontend will accept a zip file also, which will be given a GUID, plus a sequence number for each image in the zip. Thumbnails will be generated for easy job selection.
+Version 2 will include a basic frontend, a REST API that talks to the "feature store" (pandas + a single csv file) and the ML backend. Each input file is given a GUID as the id. Frontend will accept a zip file also, which will be given a GUID, plus a sequence number for each image in the zip. Thumbnails will be generated for easy job selection.
 
 ```mermaid
 graph LR
@@ -79,12 +79,13 @@ graph LR
 The dream prototype version will have the following functionalities:
 
 - Working with a single image file or a zip file
-- Continuing previous work
-- Feature store is pandas + single csv
+- Continuing previously saved work
+- Frontend will show updated splines in real time
 - 3 modes: Polygon, Spline, Region
   - Polygon: straight lines connecting segmentation points
   - Spline: centripetal Catmull-Rom curves connecting the points
   - Region: easily selectable contour regions
+- Feature store is pandas + single csv
 - Deployed on kubernetes cluster
 - Model Trainer will be continually updated based on Analyzer and Performance Monitor
 - Frontend will record speed metrics
