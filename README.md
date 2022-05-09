@@ -1,8 +1,8 @@
-# annotheta
+# annotheta - ON HOLD until further notice 2022-05-08
 
 
 
-This is the repo for our MLE capstone project at fourthbrain.ai, cohort 6. The domain we have chosen is Image Annotation, specifically Semantic Segmentation. We aim to create value for the human annotators, and to try our best to enable an increase in both speed and accuracy of the annotations.
+This is the repo for our MLE capstone project at [fourthbrain.ai](https://www.fourthbrain.ai/), cohort 6. The domain we have chosen is Image Annotation, specifically Semantic Segmentation. We aim to create value for the human annotators, and to try our best to enable an increase in both speed and accuracy of the annotations.
 
 Our vision: Every annotator is happy and having fun at their job. Our mission: To create a working proof-of-concept smart annotation platform that is easy to learn and hard to forget.
 

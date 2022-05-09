@@ -1,0 +1,6 @@
+matplotlib
+opencv-python
+tensorflow
+fastapi
+uvicorn[standard]
+jinja2
